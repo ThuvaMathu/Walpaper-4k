@@ -1,8 +1,9 @@
-import Demo from "./pages/demo";
+import Main from "./components/main";
+
 function App() {
   return (
     <div className="App">
-      <Demo />
+      <Main />
     </div>
   );
 }
