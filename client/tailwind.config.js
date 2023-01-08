@@ -2,12 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    // screens: {
-    //   sm: "480px",
-    //   md: "768px",
-    //   lg: "976px",
-    //   xl: "1440px",
-    // },
+    screens: {
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
+    },
     // colors: {
     //   blue: "#1fb6ff",
     //   purple: "#7e5bef",
@@ -20,18 +20,18 @@ module.exports = {
     //   "gray-light": "#d3dce6",
     // },
 
-    // fontFamily: {
-    //   sans: ["Graphik", "sans-serif"],
-    //   serif: ["Merriweather", "serif"],
-    // },
+    fontFamily: {
+      sans: ["Graphik", "sans-serif"],
+      serif: ["Merriweather", "serif"],
+    },
     extend: {
-      // spacing: {
-      //   "8xl": "96rem",
-      //   "9xl": "128rem",
-      // },
-      // borderRadius: {
-      //   "4xl": "2rem",
-      // },
+      spacing: {
+        "8xl": "96rem",
+        "9xl": "128rem",
+      },
+      borderRadius: {
+        "4xl": "2rem",
+      },
     },
   },
   plugins: [],
