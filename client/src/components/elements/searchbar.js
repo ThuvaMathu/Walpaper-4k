@@ -16,7 +16,7 @@ export default function Searchbar() {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:ring-blue-500 focus:outline-none "
+            className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:outline-none "
             placeholder="Search "
             required=""
             value={inputValue}
@@ -24,7 +24,7 @@ export default function Searchbar() {
           />
           <button
             type="submit"
-            className="text-white absolute right-3 top-1  bg-gray-100  font-medium rounded-lg text-sm px-4 py-2"
+            className="text-white absolute right-3 top-1   bg-white  font-medium rounded-lg text-sm px-4 py-2"
           >
             <SearchIcon />
           </button>
