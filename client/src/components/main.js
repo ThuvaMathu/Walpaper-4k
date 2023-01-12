@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppRouter } from "./app-router";
+import Carousel from "./elements/carousel/carousel";
 import MainNav from "./navbar/nav";
 
 export default function Main() {
@@ -16,24 +17,7 @@ export default function Main() {
   };
   return (
     <div>
-      <div
-        className={` ${
-          position > 100
-            ? "fixed w-full top-0 z-50 transition ease-in-out duration-500 opacity-100 shadow-gray-200 shadow-md"
-            : "opacity-0"
-        }`}
-      >
-        <MainNav />
-      </div>
-      <div
-        className={` ${
-          position < 100
-            ? "opacity-100 absolute w-full top-0 z-50"
-            : "opacity-0"
-        }`}
-      >
-        <MainNav />
-      </div>
+      <MainNav />
       <AppRouter />
     </div>
   );
