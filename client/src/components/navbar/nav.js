@@ -3,7 +3,6 @@ import logo from "../../assets/logo-no-bg.png";
 import Searchbar from "../elements/searchbar";
 import BurgerMenu from "../icons/burger-menu";
 import CloseIcon from "../icons/close-icon";
-import { CSSTransition } from "react-transition-group";
 import "../styles.scss";
 import MenuList from "./menuList";
 export default function MainNav() {
