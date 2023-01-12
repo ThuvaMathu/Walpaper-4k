@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo-no-bg.png";
 import Searchbar from "../elements/searchbar";
 import BurgerMenu from "../icons/burger-menu";
@@ -8,12 +8,11 @@ import "../styles.scss";
 import MenuList from "./menuList";
 export default function MainNav() {
   const [show, setshow] = useState(false);
-  const styleRef = useRef(null);
   const handleClick = () => {
     setshow(!show);
   };
   return (
-    <div className=" bg-red-50  ">
+    <div className=" bg-red-50">
       <nav className="2xl:container 2xl:mx-auto sm:py-4 sm:px-7 py-4 px-4">
         {/* For large and Medium-sized Screen */}
         <div className="flex justify-between sm:justify-evenly items-center  ">
