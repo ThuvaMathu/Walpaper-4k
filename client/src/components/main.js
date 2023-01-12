@@ -1,12 +1,13 @@
 import React from "react";
-import { ImagesConatainers } from "../containers/images/images.container";
-import Landing from "./landing";
+import { AppRouter } from "../app-router";
+
+import MainNav from "./navbar/nav";
 
 export default function Main() {
   return (
     <div>
-      <Landing />
-      <ImagesConatainers />
+      <MainNav />
+      <AppRouter />
     </div>
   );
 }
