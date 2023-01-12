@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./pages/landing";
-import About from "./pages/about";
-import Contact from "./pages/contact";
-import Upload from "./pages/upload";
+import Landing from "./components/pages/landing";
+import About from "./components/pages/about";
+import Contact from "./components/pages/contact";
+import Upload from "./components/pages/upload";
 
 export const AppRouter = () => (
   <BrowserRouter>
