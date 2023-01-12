@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Outlet, Link } from "react-router-dom";
 export default function MenuList(props) {
   return (
     <div>
@@ -9,9 +9,11 @@ export default function MenuList(props) {
       >
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
           <div className="group">
-            <p className="text-md hover:text-rose-700 text-rose-500 whitespace-nowrap tracking-normal transition-all duration-200 ease-in-out font-semibold">
-              About us
-            </p>
+            <a href="/about">
+              <p className="text-md hover:text-rose-700 text-rose-500 whitespace-nowrap tracking-normal transition-all duration-200 ease-in-out font-semibold">
+                About us
+              </p>
+            </a>
             <hr className="h-1 bg-rose-500 max-w-0 group-hover:max-w-full transition-all duration-500 ease-in-out" />
           </div>
         </li>

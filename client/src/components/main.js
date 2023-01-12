@@ -1,14 +1,15 @@
 import React from "react";
-import { ImagesConatainers } from "../containers/images/images.container";
+import { AppRouter } from "./app-router";
 import Carousel from "./elements/carousel/carousel";
-import Landing from "./landing";
+import MainNav from "./navbar/nav";
 
 export default function Main() {
   return (
     <div>
-      <Landing />
+      <MainNav />
       <Carousel/>
-      <ImagesConatainers/>
+      <AppRouter />
+      
     </div>
   );
 }
