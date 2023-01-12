@@ -1,5 +1,5 @@
 import React from "react";
-import Carousel from "./carousel/carousel";
+import Carousel from "./elements/carousel/carousel";
 import Landing from "./landing";
 
 export default function Main() {
@@ -7,6 +7,7 @@ export default function Main() {
     <div>
       <Landing />
       <Carousel/>
+      <ImagesConatainers />
     </div>
   );
 }
