@@ -18,6 +18,7 @@ export default function Main() {
   return (
     <div>
       <MainNav />
+      <Carousel />
       <AppRouter />
     </div>
   );
