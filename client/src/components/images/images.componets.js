@@ -1,12 +1,28 @@
 import React from 'react'
+import {Dialog,DialogContent,DialogTitle,DialogContentText} from '@mui/material'
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close'
 
 export const ImageComponents = ({imagesList,title}) => {
+  const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState();
+  const [fullWidth, setFullWidth] = React.useState(true);
+  const [maxWidth, setMaxWidth] = React.useState('lg');
+  const handleClickOpen = (dataValue) => {
+    setData(dataValue)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+console.log(data,"data")
   return (
     <div className="container mx-auto">
 <h1 className='text-5xl font-bold m-2'>{title}</h1>
 <div className="gap-4 columns-1  md:columns-3">
 {imagesList?.map((imagedata, index)=>(
-    <div className='relative  group'>
+    <div className='relative  group' onClick={()=>handleClickOpen(imagedata)}>
          {/* <div className='absolute cursor-pointer  px-4 text-end text-lg text-white top-6 right-2  opacity-0 group-hover:opacity-100'>
         
 <button type="button" class="bg-white text-black border border-white-700   font-medium rounded-lg text-sm p-2.5 text-center">
@@ -38,7 +54,42 @@ export const ImageComponents = ({imagesList,title}) => {
 ))}
 
 </div>
-
+<Dialog
+        fullWidth={fullWidth}
+        maxWidth={maxWidth}
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>
+        <h5 className='text-2xl font-bold m-2'>{data?.photographer}</h5>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+           <div className="container mx-auto">
+           <div className='justify-center'>
+          
+    <img  src={data?.src?.large} />
+    </div>
+   
+           </div>
+          </DialogContentText>
+         
+        </DialogContent>
+       
+      </Dialog>
 </div>
+
   )
 }
