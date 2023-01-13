@@ -6,6 +6,8 @@ import {
   DialogContentText,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CloseIcon from "@mui/icons-material/Close";
 import DownloadModel from "../elements/download-model";
 
@@ -50,7 +52,7 @@ export const ImageComponents = ({ imagesList, title }) => {
         </button>
         </div> */}
 
-            <a>
+            <a onClick={() => handleClickOpen(imagedata)}>
               <div className="px-2 py-4">
                 <img
                   className="w-[480px] h-auto rounded-[5px]"
@@ -65,6 +67,7 @@ export const ImageComponents = ({ imagesList, title }) => {
               <button
                 type="button"
                 class="bg-white text-black border border-white-700   font-medium rounded-lg text-sm p-2.5 text-center"
+                onClick={() => handleDownload(imagedata)}
               >
                 <svg
                   width="24"
@@ -112,19 +115,86 @@ export const ImageComponents = ({ imagesList, title }) => {
         open={open}
         onClose={handleClose}
       >
+        
         <DialogTitle>
-          <h5 className="text-2xl font-bold m-2">{data?.photographer}</h5>
+          <h5 className="text-2xl font-bold m-2">{data?.photographer}
+          
+          
+          </h5>
+          <IconButton
+          aria-label="close"
+         
+          sx={{
+            position: 'absolute',
+            right: 20,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <Button
+       
+        variant="contained"
+        onClick={handleMenuClick}
+       
+      >
+        Free Download | {openMenu === true ? (
+            <ExpandLessIcon />
+          ) : (
+            <ExpandMoreIcon/>
+          )}
+        </Button>
+        <Menu
+        anchorEl={anchorEl}
+       
+        open={openMenu}
+        onClose={handleMenuClose}
+       
+       
+      >
+        <MenuItem>
+        <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    name="radio-buttons-group"
+    onChange={(value)=>handleChange(value)}
+  >
+    <FormLabel id="demo-radio-buttons-group-label">Choose a size : </FormLabel>
+    <FormControlLabel value={data?.src?.original} control={<Radio />} label="Original  4480x6720"  />
+    <Divider />
+    <FormControlLabel value={data?.src?.large} control={<Radio />} label="Large  1920x2880" />
+    <Divider />
+    <FormControlLabel value={data?.src?.medium} control={<Radio />} label="Medium  1280x1920" />
+    <Divider />
+    <FormControlLabel value={data?.src?.small} control={<Radio />} label="Small  640x960" />
+    <Divider />
+    <Button
+       
+       variant="contained"
+       onClick={()=>handleDownloadSlelectedSize()}
+      
+     >
+      Download  Size
+      </Button>
+  </RadioGroup>
+         
+        </MenuItem>
+       
+        
+      </Menu>
+        </IconButton>
           <IconButton
             aria-label="close"
             sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
+              position: "fixed",
+              right:'auto',
+              left: '80px',
+              top: '50px',
+              color: "white",
+          
             }}
           >
-            <CloseIcon onClick={handleClose} />
+            <CloseIcon  onClick={handleClose} />
           </IconButton>
+         
         </DialogTitle>
         <DialogContent
           sx={{ display: "flex", justifyContent: "center !important" }}
@@ -133,7 +203,7 @@ export const ImageComponents = ({ imagesList, title }) => {
             <div className="container mx-auto">
               <img
                 src={data?.src?.large}
-                className=" w-[480px] h-auto justify-center place-content-center"
+                className=" max-h-[75vh] min-h-[300px] max-w-[calc(50vh)] min-w-[calc(200px)] justify-center place-content-center"
               />
             </div>
           </DialogContentText>
