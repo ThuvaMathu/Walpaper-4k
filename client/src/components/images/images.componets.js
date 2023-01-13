@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +30,40 @@ export const ImageComponents = ({ imagesList, title }) => {
     setShowModal(param.status);
   };
   console.log(data, "data");
+  const handleDownload = (image) => {
+    const blob1 = new Blob([image?.src?.original], {
+      type: "multipart/form-data",
+    });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob1);
+    const filename = image?.src?.original;
+    link.download = filename;
+    link.click();
+  };
+  const [selectedsize, setSelectedSize] = useState();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openMenu, setOpenMenu] = useState(false);
+  const handleMenuClick = (event) => {
+    setOpenMenu(true);
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setOpenMenu(false);
+  };
+  const handleChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
+  useEffect(() => {}, [openMenu]);
+  const handleDownloadSlelectedSize = () => {
+    const blob1 = new Blob([selectedsize], { type: "multipart/form-data" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob1);
+    const filename = selectedsize;
+    link.download = filename;
+    link.click();
+    handleMenuClose();
+  };
   return (
     <div className="container mx-auto">
       <h1 className="text-5xl font-bold m-2">{title}</h1>
