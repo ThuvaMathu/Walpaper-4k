@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,21 +7,26 @@ import {
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import DownloadModel from "../elements/download-model";
 
 export const ImageComponents = ({ imagesList, title }) => {
-  const [open, setOpen] = React.useState(false);
-  const [data, setData] = React.useState();
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState("lg");
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState();
+  const [fullWidth, setFullWidth] = useState(true);
+  const [maxWidth, setMaxWidth] = useState("lg");
   const handleClickOpen = (dataValue) => {
     setData(dataValue);
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose1 = () => {
     setOpen(false);
   };
-
+  const [showModal, setShowModal] = useState(false);
+  const handleModel = (param) => {
+    setData(param.data);
+    setShowModal(param.status);
+  };
   console.log(data, "data");
   return (
     <div className="container mx-auto">
@@ -30,7 +35,8 @@ export const ImageComponents = ({ imagesList, title }) => {
         {imagesList?.map((imagedata, index) => (
           <div
             className="relative  group"
-            onClick={() => handleClickOpen(imagedata)}
+            // onClick={() => handleClickOpen(imagedata)}
+            onClick={() => handleModel({ data: imagedata, status: true })}
           >
             {/* <div className='absolute cursor-pointer  px-4 text-end text-lg text-white top-6 right-2  opacity-0 group-hover:opacity-100'>
         
@@ -100,7 +106,7 @@ export const ImageComponents = ({ imagesList, title }) => {
 ))}
 
 </div> */}
-      <Dialog
+      {/* <Dialog
         fullWidth={fullWidth}
         maxWidth={maxWidth}
         open={open}
@@ -132,7 +138,10 @@ export const ImageComponents = ({ imagesList, title }) => {
             </div>
           </DialogContentText>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
+      <div className={`${showModal ? "block" : " hidden "}`}>
+        <DownloadModel handle={handleModel} imageData={data} />
+      </div>
     </div>
   );
 };
