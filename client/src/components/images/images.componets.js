@@ -244,7 +244,7 @@ export const ImageComponents = ({ imagesList, title }) => {
         </DialogContent>
       </Dialog> */}
       <div className={`${showModal ? "block" : " hidden "}`}>
-        <DownloadModel handle={handleModel} imageData={data} />
+        <DownloadModel handle={handleModel} imageData={data}/>
       </div>
     </div>
   );
