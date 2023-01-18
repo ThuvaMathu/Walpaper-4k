@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo-no-bg.png";
 import Searchbar from "../elements/searchbar";
+import ThemeSwitch from "../elements/theme-switch";
 import BurgerMenu from "../icons/burger-menu";
 import CloseIcon from "../icons/close-icon";
 import "../styles.scss";
@@ -16,11 +18,13 @@ export default function MainNav() {
         {/* For large and Medium-sized Screen */}
         <div className="flex justify-between sm:justify-evenly items-center  ">
           <div className=" sm:flex flex-row items-center space-x-6">
-            <img
-              className="img-responsive w-14 sm:w-20"
-              src={logo}
-              alt="logo"
-            />
+            <Link to="/">
+              <img
+                className="img-responsive w-14 sm:w-20"
+                src={logo}
+                alt="logo"
+              />
+            </Link>
           </div>
           <p className="text-rose-700 text-2xl mx-2 font-semibold hidden xl:block ">
             Wall Desk
@@ -31,6 +35,9 @@ export default function MainNav() {
           <div className="hidden sm:flex flex-row space-x-4">
             <div className="flex items-center">
               <MenuList styles={"hidden md:flex"} />
+              <div className="hidden md:flex">
+                <ThemeSwitch />
+              </div>
             </div>
           </div>
           {/* Burger Icon */}
@@ -49,15 +56,16 @@ export default function MainNav() {
             show ? "max-h-60 mt-4" : "max-h-0"
           } md:hidden  mx-auto truncate transition-all ease-in-out duration-700`}
         >
-          <div className="flex flex-row items-center justify-center space-x-6">
+          <div className="flex min-[260px]:flex-row flex-col items-center justify-between mx-0 sm:mx-10 ">
             <p className="text-rose-700 text-2xl mx-2 font-semibold  ">
               Wall Desk
             </p>
+            <ThemeSwitch />
           </div>
-          <div className="flex flex-col gap-4 mt-4 w-80 mx-auto ">
+          <div className="">
             <div className="flex items-center justify-center  ">
               <MenuList styles={""} />
-            </div>
+            </div>{" "}
           </div>
         </div>
       </nav>
