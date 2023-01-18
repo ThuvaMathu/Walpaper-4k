@@ -19,7 +19,6 @@ export default function DownloadModel(props) {
     }
     return () => {
       setBgColor("");
-      setShowInfo(false);
     };
   }, [props]);
   useLayoutEffect(() => {
@@ -89,43 +88,40 @@ export default function DownloadModel(props) {
                   <CloseIcon show={true} />
                 </button>
               </div>
-              <div className="px-4 md:px-10 pt-2 md:pt-2 md:pb-4 pb-7">
-                <div className="flex flex-col lg:flex-row w-full h-full sm:max-h-[500px] items-center  rounded bg-white shadow overflow-y-auto scrollbar-hide ">
-                  <div className="w-full h-full lg:w-3/4 dark:bg-gray-800 p-2 max-h-[300px] sm:max-h-[400px] lg:overflow-y-auto scrollbar-hide">
-                    <div className="flex flex-col items-center justify-center">
-                      <div className="w-full p-2  rounded-md flex items-center justify-center">
-                        {/* <ImgSkelton /> */}
-                        <img
-                          className="  max-h-96 "
-                          src={props.imageData?.src?.large}
-                          alt="original"
-                        />
-                      </div>{" "}
-                      <div
-                        className="hidden flex-col justify-left w-full rounded-bl-md truncate h-full  transition-all ease-in-out duration-500 m-2 lg:flex"
-                        style={{ backgroundColor: bgColor + "20" }}
-                      >
-                        {imageInfo}
+              <div className="px-4 md:px-10 pt-2 md:pt-2 md:pb-4 pb-7 ">
+                <div className="sm:max-h-[440px] overflow-y-auto scrollbar-hide">
+                  <div className="flex flex-col lg:flex-row w-full h-full  items-center  rounded bg-white shadow  ">
+                    <div className="w-full h-full lg:w-3/4 dark:bg-gray-800 p-2">
+                      <div className="flex flex-col items-center justify-center">
+                        <div className="w-full p-2  rounded-md flex items-center justify-center">
+                          {/* <ImgSkelton /> */}
+                          <img
+                            className="  max-h-96 "
+                            src={props.imageData?.src?.large}
+                            alt="original"
+                          />
+                        </div>{" "}
                       </div>
                     </div>
+                    <div className="w-[80%] m-6 lg:w-1/4 h-auto dark:border-gray-700  border-t lg:border-t-0 lg:border-r lg:border-l lg:rounded-r dark:bg-gray-700 bg-gray-100">
+                      <h5 className="text-md font-bold m-2 text-center">
+                        Download option
+                      </h5>
+                      <DownloadOption imageData={props.imageData} />
+                    </div>
                   </div>
-                  <div className="w-[80%] m-6 lg:w-1/4 h-auto dark:border-gray-700  border-t lg:border-t-0 lg:border-r lg:border-l lg:rounded-r dark:bg-gray-700 bg-gray-100">
-                    <h5 className="text-md font-bold m-2 text-center">
-                      Download option
-                    </h5>
-                    <DownloadOption imageData={props.imageData} />
-                  </div>
-                  <div className="w-[80%]">
+                  <div className=" w-full justify-center items-center flex mt-4 shadow-sm ">
+                    {" "}
                     <div
                       className={`
-                         flex flex-col justify-left w-full rounded-bl-md truncate h-full  transition-all ease-in-out duration-500`}
+                         flex flex-col justify-left w-full rounded-md truncate h-full  transition-all ease-in-out duration-500`}
                       style={{ backgroundColor: bgColor + "20" }}
                     >
                       {imageInfo}
                     </div>
                   </div>
                 </div>
-                <div className="flex items-end justify-end mt-3">
+                <div className="flex items-end justify-end my-4">
                   <button
                     onClick={() => {}}
                     className="px-4 mx-2 py-2 w-24 bg-gray-400 hover:bg-gray-500 shadow rounded text-sm text-white"
