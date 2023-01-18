@@ -29,7 +29,6 @@ export const ImageComponents = ({ imagesList, title }) => {
     setData(param.data);
     setShowModal(param.status);
   };
-  console.log(data, "data");
   const handleDownload = (image) => {
     const blob1 = new Blob([image?.src?.original], {
       type: "multipart/form-data",
@@ -71,6 +70,7 @@ export const ImageComponents = ({ imagesList, title }) => {
         {imagesList?.map((imagedata, index) => (
           <div
             className="relative  group"
+            key={index}
             // onClick={() => handleClickOpen(imagedata)}
             onClick={() => handleModel({ data: imagedata, status: true })}
           >
@@ -244,7 +244,7 @@ export const ImageComponents = ({ imagesList, title }) => {
         </DialogContent>
       </Dialog> */}
       <div className={`${showModal ? "block" : " hidden "}`}>
-        <DownloadModel handle={handleModel} imageData={data}/>
+        <DownloadModel handle={handleModel} imageData={data} />
       </div>
     </div>
   );

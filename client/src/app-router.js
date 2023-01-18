@@ -4,15 +4,18 @@ import Landing from "./components/pages/landing";
 import About from "./components/pages/about";
 import Contact from "./components/pages/contact";
 import Upload from "./components/pages/upload";
+import MainNav from "./components/navbar/nav";
 
 export const AppRouter = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Landing />}>
+  <>
+    <BrowserRouter>
+      <MainNav />
+      <Routes>
+        <Route index path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/contact" element={<Contact />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
+      </Routes>
+    </BrowserRouter>
+  </>
 );
