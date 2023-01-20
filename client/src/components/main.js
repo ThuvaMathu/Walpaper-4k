@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppRouter } from "../app-router";
+import AppProvider from "../context/provider";
 import MainNav from "./navbar/nav";
 
 export default function Main() {
@@ -16,8 +17,9 @@ export default function Main() {
   };
   return (
     <div>
-      {/* <MainNav /> */}
-      <AppRouter />
+      <AppProvider>
+        <AppRouter />
+      </AppProvider>
     </div>
   );
 }

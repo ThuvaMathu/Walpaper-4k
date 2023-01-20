@@ -15,10 +15,16 @@ const redisClient = redis.createClient();
 const getImages = async (req, res, next) => {
   // Redis setup
   const searchQuery = req.body.reqData;
+  const pageNo = req.body.reqPage;
   const options = {
     method: "GET",
     url: "https://pexelsdimasv1.p.rapidapi.com/v1/search",
-    params: { query: searchQuery, locale: "en-US", per_page: "300", page: "1" },
+    params: {
+      query: searchQuery,
+      locale: "en-US",
+      per_page: "300",
+      page: pageNo,
+    },
     headers: {
       Authorization: process.env.API_KEY_ID,
       //Authorization: "563492ad6f917000010000010bc59003765749af8c148450380a1309",

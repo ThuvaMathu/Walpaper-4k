@@ -10,8 +10,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CloseIcon from "@mui/icons-material/Close";
 import DownloadModel from "../elements/download-model";
+import { useProvider } from "../../context/provider";
 
-export const ImageComponents = ({ imagesList, title }) => {
+export const ImageComponents = () => {
+  const { imageRes, headerValue } = useProvider();
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
   const [open, setOpen] = useState(false);
   const [data, setData] = useState();
   const [fullWidth, setFullWidth] = useState(true);
@@ -65,9 +73,9 @@ export const ImageComponents = ({ imagesList, title }) => {
   };
   return (
     <div className="container mx-auto">
-      <h1 className="text-5xl font-bold m-2">{title}</h1>
+      <h1 className="text-5xl font-bold m-2">{toTitleCase(headerValue)}</h1>
       <div className="gap-4 columns-1  md:columns-3">
-        {imagesList?.map((imagedata, index) => (
+        {imageRes?.map((imagedata, index) => (
           <div
             className="relative  group"
             key={index}

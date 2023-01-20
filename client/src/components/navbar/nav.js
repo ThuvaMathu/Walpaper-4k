@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-no-bg.png";
-import Searchbar from "../elements/searchbar";
+import Searchbar from "./searchbar";
 import ThemeSwitch from "../elements/theme-switch";
 import BurgerMenu from "../icons/burger-menu";
 import CloseIcon from "../icons/close-icon";

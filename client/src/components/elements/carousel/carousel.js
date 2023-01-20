@@ -1,17 +1,20 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 
 export default function Carousel() {
-  const info = [
-    "Slidasasdasde1",
-    "slide2",
-    "slide2",
-    "slide3",
-    "slide4",
-    "slide5",
-    "slide6",
-  ];
+  const [datas, setDatas] = useState([]);
+  useEffect(() => {
+    infoData();
+  }, []);
+
+  const infoData = () => {
+    let data = [];
+    for (let i = 0; i < 30; i++) {
+      data.push(`example${i}`);
+    }
+    setDatas(data);
+  };
   return (
     <div>
       <div className=" mx-2 sm:m-4 px-4 h-14 mb-10  ">
@@ -19,7 +22,7 @@ export default function Carousel() {
           hasTrack={false}
           options={{
             perMove: 1,
-            fixedWidth: "10rem",
+            fixedWidth: "auto",
             fixedHeight: "5rem",
             type: "loop",
             rewind: true,
@@ -32,10 +35,10 @@ export default function Carousel() {
             </div>
 
             <SplideTrack>
-              {info.map((data, index) => (
+              {datas.map((data, index) => (
                 <SplideSlide key={index}>
-                  <div className=" h-16 m-1">
-                    <div className="border border-gray-300 rounded-md  p-[10px] hover:bg-green-300 duration-700 transition ">
+                  <div className=" h-14 m-1">
+                    <div className="border border-gray-300 rounded-md px-6 py-2 hover:bg-green-300 duration-700 transition ">
                       <h5 className=" text-center truncate ">{data}</h5>
                     </div>
                   </div>

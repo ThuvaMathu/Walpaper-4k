@@ -61,7 +61,10 @@ export default function DownloadModel(props) {
         className="z-50 fixed w-full h-full flex justify-center items-center inset-0"
       >
         <div
-          onClick={() => props.handle(false)}
+          onClick={() => {
+            props.handle(false);
+            setShowInfo(false);
+          }}
           className="w-full h-full bg-gray-900/50 z-0 absolute inset-0"
         />
         <div className="mx-auto container ">
@@ -82,7 +85,10 @@ export default function DownloadModel(props) {
                   </p>
                 </div>
                 <button
-                  onClick={() => props.handle(false)}
+                  onClick={() => {
+                    props.handle(false);
+                    setShowInfo(false);
+                  }}
                   className="focus:outline-none"
                 >
                   <CloseIcon show={true} />
