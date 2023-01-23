@@ -10,7 +10,7 @@ export default function MenuList(props) {
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
           <div className="group">
             <Link to="/about">
-              <p className="text-md hover:text-rose-700 text-rose-500 whitespace-nowrap tracking-normal transition-all duration-200 ease-in-out font-semibold">
+              <p className="text-lg hover:text-[#dc4100] text-rose-500 whitespace-nowrap tracking-normal transition-all duration-200 ease-in-out font-semibold">
                 About us
               </p>
             </Link>
@@ -20,7 +20,7 @@ export default function MenuList(props) {
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
           <div className="group ">
             <Link to="/contact">
-              <p className="text-md  hover:text-rose-700 text-rose-500 tracking-normal transition-all duration-200 ease-in-out font-semibold">
+              <p className="text-lg  hover:text-[#dc4100] text-rose-500 tracking-normal transition-all duration-200 ease-in-out font-semibold">
                 Contact
               </p>
             </Link>
@@ -30,7 +30,7 @@ export default function MenuList(props) {
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
           <div className="group ">
             <Link to="/upload">
-              <p className="text-md  hover:text-rose-700 text-rose-500 tracking-normal transition-all duration-200 ease-in-out font-semibold">
+              <p className="text-lg  hover:text-[#dc4100] text-rose-500 tracking-normal transition-all duration-200 ease-in-out font-semibold">
                 Upload
               </p>
             </Link>

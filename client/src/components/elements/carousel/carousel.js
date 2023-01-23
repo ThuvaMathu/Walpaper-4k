@@ -3,18 +3,15 @@ import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 
 export default function Carousel() {
-  const [datas, setDatas] = useState([]);
-  useEffect(() => {
-    infoData();
-  }, []);
-
-  const infoData = () => {
-    let data = [];
-    for (let i = 0; i < 30; i++) {
-      data.push(`example${i}`);
-    }
-    setDatas(data);
-  };
+  const datas = [
+    "Walpaper",
+    "Natures",
+    "Flower",
+    "Breadcrumbs",
+    "4K Walpaper",
+    "Hd Images",
+    "car",
+  ];
   return (
     <div>
       <div className=" mx-2 sm:m-4 px-4 h-14 mb-10  ">
@@ -38,8 +35,10 @@ export default function Carousel() {
               {datas.map((data, index) => (
                 <SplideSlide key={index}>
                   <div className=" h-14 m-1">
-                    <div className="border border-gray-300 rounded-md px-6 py-2 hover:bg-green-300 duration-700 transition ">
-                      <h5 className=" text-center truncate ">{data}</h5>
+                    <div className="border border-gray-300 rounded-md px-6 py-2 hover:bg-[#ffbb00] hover:text-white duration-300 transition ">
+                      <h5 className=" text-center font-medium truncate text-md ">
+                        {data}
+                      </h5>
                     </div>
                   </div>
                 </SplideSlide>

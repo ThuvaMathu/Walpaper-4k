@@ -5,7 +5,7 @@ export default function SearchIcon() {
     <div>
       <svg
         aria-hidden="true"
-        className="w-6 h-6 text-rose-500 "
+        className="w-6 h-6 text-[#dc4100] "
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

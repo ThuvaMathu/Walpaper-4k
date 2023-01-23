@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useProvider } from "../../context/provider";
 import { commonUrl } from "../../services/config";
 import SearchIcon from "../icons/search-icon";
@@ -6,11 +6,8 @@ import SearchIcon from "../icons/search-icon";
 export default function Searchbar() {
   const [inputValue, setInputValue] = useState("");
   const { setImageRes, setIsLoading, setheaderValue } = useProvider();
-  // const handleSubmit = (e) => {
-  //   setInputValue("loading...");
-  //   setTimeout(() => setInputValue("here is your result"), 1000);
-  //   setTimeout(() => setInputValue(""), 2000);
-  // };
+  const inputRef = useRef();
+  const btnRef = useRef();
 
   const getImage = (e) => {
     e.preventDefault();
