@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
-
 import DownloadModel from "../elements/download-model";
 import { useProvider } from "../../context/provider";
 import LoadMore from "../elements/loadmore";
+import { demoResult } from "../../services/demo-results";
 
 export const ImageComponents = () => {
   const { imageRes, headerValue } = useProvider();
-
-  const [open, setOpen] = useState(false);
+  const [imageData, setImageData] = useState(demoResult.photos);
   const [data, setData] = useState();
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    console.log(imageRes, imageRes == null, "data");
+    if (imageRes !== null) {
+      setImageData(imageRes);
+    }
+  }, [imageRes]);
 
   const handleClickOpen = (dataValue) => {
     setData(dataValue);
-    setOpen(true);
   };
 
-  const [showModal, setShowModal] = useState(false);
   const handleModel = (param) => {
     setData(param.data);
     setShowModal(param.status);
@@ -30,32 +35,32 @@ export const ImageComponents = () => {
     link.download = filename;
     link.click();
   };
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(false);
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-  };
-  useEffect(() => {}, [openMenu]);
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  //   setOpenMenu(false);
+  // };
   return (
     <div className="container mx-auto min-h-screen">
       <h1 className="text-5xl font-bold m-2 capitalize  ">{headerValue}</h1>
       <div className="gap-4 columns-1  md:columns-3">
-        {imageRes?.map((imagedata, index) => (
+        {imageData.map((imagedata, index) => (
           <div
             className="relative  group"
             key={index}
             // onClick={() => handleClickOpen(imagedata)}
             onClick={() => handleModel({ data: imagedata, status: true })}
           >
-            <a onClick={() => handleClickOpen(imagedata)}>
-              <div className="px-2 py-4">
-                <img
-                  className="w-[480px] h-auto rounded-[5px]"
-                  src={imagedata?.src?.large}
-                />
-              </div>
-            </a>
+            <div
+              className="px-2 py-4"
+              onClick={() => handleClickOpen(imagedata)}
+            >
+              <img
+                className="w-[480px] h-auto rounded-[5px]"
+                src={imagedata?.src?.large}
+                alt={imageData?.alt}
+              />
+            </div>
             <div className="absolute px-4 text-start text-lg text-white bottom-8 opacity-0 group-hover:opacity-100">
               {imagedata.photographer}
             </div>
@@ -72,14 +77,14 @@ export const ImageComponents = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"
                     fill="#000"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M12 3a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zM5 20a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"
                     fill="#000"
                   />

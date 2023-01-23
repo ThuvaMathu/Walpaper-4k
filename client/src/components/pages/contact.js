@@ -1,38 +1,38 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Footer from "./footer";
 
 export default function Contact() {
-  const [isDarkMode, setisDarkMode] = useState(false);
-  const switchToggle = useRef(null);
-  const darkIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-</svg>`;
+  //   const [isDarkMode, setisDarkMode] = useState(false);
+  //   const switchToggle = useRef(null);
+  //   const darkIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  // <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  // </svg>`;
 
-  const lightIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-</svg>`;
+  //   const lightIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  // <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  // </svg>`;
 
-  const toggleTheme = () => {
-    setisDarkMode(!isDarkMode);
-    localStorage.setItem("isDarkmode", isDarkMode);
-    switchTheme();
-  };
+  // const toggleTheme = () => {
+  //   setisDarkMode(!isDarkMode);
+  //   localStorage.setItem("isDarkmode", isDarkMode);
+  //   switchTheme();
+  // };
 
-  function switchTheme() {
-    if (isDarkMode) {
-      switchToggle.current.classList.remove("bg-yellow-500", "-translate-x-2");
-      switchToggle.current.classList.add("bg-gray-700", "translate-x-full");
-      setTimeout(() => {
-        switchToggle.current.innerHTML = darkIcon;
-      }, 250);
-    } else {
-      switchToggle.current.classList.add("bg-yellow-500", "-translate-x-2");
-      switchToggle.current.classList.remove("bg-gray-700", "translate-x-full");
-      setTimeout(() => {
-        switchToggle.current.innerHTML = lightIcon;
-      }, 250);
-    }
-  }
+  // function switchTheme() {
+  //   if (isDarkMode) {
+  //     switchToggle.current.classList.remove("bg-yellow-500", "-translate-x-2");
+  //     switchToggle.current.classList.add("bg-gray-700", "translate-x-full");
+  //     setTimeout(() => {
+  //       switchToggle.current.innerHTML = darkIcon;
+  //     }, 250);
+  //   } else {
+  //     switchToggle.current.classList.add("bg-yellow-500", "-translate-x-2");
+  //     switchToggle.current.classList.remove("bg-gray-700", "translate-x-full");
+  //     setTimeout(() => {
+  //       switchToggle.current.innerHTML = lightIcon;
+  //     }, 250);
+  //   }
+  // }
   return (
     <div>
       {/* <div className="flex flex-col justify-center items-center h-screen dark:bg-gray-900 bg-white">
@@ -85,8 +85,10 @@ export default function Contact() {
               title="map"
               marginheight="0"
               marginwidth="0"
-              src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+              // src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+              src="https://maps.google.com/maps?q=21,%20elkhorn%20street,%20bellbird%20park&t=&z=13&ie=UTF8&iwloc=&output=embed"
             ></iframe>
+
             <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
               <div className="lg:w-1/2 px-6">
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
@@ -101,7 +103,7 @@ export default function Contact() {
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                   EMAIL
                 </h2>
-                <a className="text-indigo-500 leading-relaxed">
+                <a href="/" className="text-indigo-500 leading-relaxed">
                   example@email.com
                 </a>
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">

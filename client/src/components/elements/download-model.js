@@ -1,8 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import CloseIcon from "../icons/close-icon";
-import ImgSkelton from "../icons/img-skelton";
 import logo from "../../assets/logo-no-bg.png";
-import { Button } from "@mui/material";
 import DownloadOption from "./download-option";
 import "../styles.scss";
 export default function DownloadModel(props) {
@@ -20,15 +18,16 @@ export default function DownloadModel(props) {
     return () => {
       setBgColor("");
     };
-  }, [props]);
+  }, [props, bgColor]);
+
   useLayoutEffect(() => {
     switchTheme();
-  }, [showInfo]);
+  });
 
   const handleInfo = () => {
     setShowInfo(!showInfo);
   };
-  function switchTheme() {
+  const switchTheme = () => {
     if (showInfo) {
       scrollT.current.classList.remove("hidden");
       scrollT.current.classList.add("block");
@@ -37,7 +36,7 @@ export default function DownloadModel(props) {
       scrollT.current.classList.add("hidden");
       scrollT.current.classList.remove("block");
     }
-  }
+  };
   const imageInfo = (
     <div ref={scrollT} className=" hidden p-3 relative">
       <div className=" absolute top-2 right-2 ">
@@ -71,7 +70,7 @@ export default function DownloadModel(props) {
           <div className="flex items-center justify-center h-full w-full">
             <div className="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-11/12 md:w-11/12 lg:w-3/4 2xl:w-3/4">
               <div
-                className={` rounded-tl-md rounded-tr-md px-4 md:px-8 md:py-4 py-7 flex items-center justify-between`}
+                className={` rounded-tl-md rounded-tr-md px-4 md:px-8 md:py-6 py-3 flex items-center justify-between`}
                 style={{ backgroundColor: bgColor + "90" }}
               >
                 <img
@@ -95,7 +94,7 @@ export default function DownloadModel(props) {
                 </button>
               </div>
               <div className="px-4 md:px-10 pt-2 md:pt-2 md:pb-4 pb-7 ">
-                <div className="sm:max-h-[440px] overflow-y-auto scrollbar-hide">
+                <div className="max-h-[460px]  overflow-y-auto scrollbar-hide">
                   <div className="flex flex-col lg:flex-row w-full h-full  items-center  rounded bg-white shadow  ">
                     <div className="w-full h-full lg:w-3/4 dark:bg-gray-800 p-2">
                       <div className="flex flex-col items-center justify-center">

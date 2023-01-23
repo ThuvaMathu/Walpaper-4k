@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
-  const [imageRes, setImageRes] = useState();
+  const [imageRes, setImageRes] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [headerValue, setheaderValue] = useState("Desktop Wallpaper");
   return (

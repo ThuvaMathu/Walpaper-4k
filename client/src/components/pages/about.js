@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import LoadMore from "../elements/loadmore";
-import ThemeSwitch from "../elements/theme-switch";
-import SearchIcon from "../icons/search-icon";
+// import ThemeSwitch from "../elements/theme-switch";
+// import SearchIcon from "../icons/search-icon";
 import Footer from "./footer";
 
 export default function About() {
-  const [darkColor, setDarkColor] = useState(false);
+  // const [darkColor, setDarkColor] = useState(false);
 
   return (
     // <div className={`${darkColor ? "dark" : ""}`}>
