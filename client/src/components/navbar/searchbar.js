@@ -5,37 +5,39 @@ import SearchIcon from "../icons/search-icon";
 
 export default function Searchbar() {
   const [inputValue, setInputValue] = useState("");
-  const { setImageRes, setIsLoading, setheaderValue } = useProvider();
+  const { setImageRes, setIsLoading, setheaderValue, setPageValue } =
+    useProvider();
 
   const getImage = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    const options = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ reqData: inputValue, reqPage: 1 }),
-    };
-    fetch(`${commonUrl}/searchimage`, options)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response, "data");
-
-        if (response.total_results > 0) {
-          console.log("data i am working");
-          setheaderValue(inputValue);
-          setImageRes(response.photos);
-          setIsLoading(false);
-        } else {
-          console.log(response, "no data");
-        }
-      })
-      .then(() => {
-        setInputValue("");
-      })
-      .catch((err) => console.error(err, "error from client"));
+    setheaderValue(inputValue);
+    // setIsLoading(true);
+    // const options = {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ reqData: inputValue, reqPage: 1 }),
+    // };
+    // fetch(`${commonUrl}/searchimage`, options)
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //     console.log(response, "data");
+    //     if (response.total_results > 0) {
+    //       console.log("data i am working");
+    //       setPageValue(1);
+    //       setheaderValue(inputValue);
+    //       setImageRes(response.photos);
+    //       setIsLoading(false);
+    //     } else {
+    //       console.log(response, "no data");
+    //     }
+    //   })
+    //   .then(() => {
+    //     setInputValue("");
+    //   })
+    //   .catch((err) => console.error(err, "error from client"));
   };
   return (
     <div>

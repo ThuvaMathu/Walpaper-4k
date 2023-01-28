@@ -2,9 +2,10 @@ import React, { createContext, useContext, useState } from "react";
 
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
-  const [imageRes, setImageRes] = useState(null);
+  const [imageRes, setImageRes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [headerValue, setheaderValue] = useState("Desktop Wallpaper");
+  const [pageValue, setPageValue] = useState(1);
   return (
     <AppContext.Provider
       value={{
@@ -14,6 +15,8 @@ const AppProvider = ({ children }) => {
         setIsLoading,
         headerValue,
         setheaderValue,
+        pageValue,
+        setPageValue,
       }}
     >
       {children}

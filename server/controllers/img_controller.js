@@ -16,6 +16,7 @@ const getImages = async (req, res, next) => {
   // Redis setup
   const searchQuery = req.body.reqData;
   const pageNo = req.body.reqPage;
+  console.log("Search data:", searchQuery, pageNo);
   const options = {
     method: "GET",
     url: "https://pexelsdimasv1.p.rapidapi.com/v1/search",
@@ -33,33 +34,43 @@ const getImages = async (req, res, next) => {
     },
   };
 
-  const CommonKey = `unique-key-${searchQuery}`;
+  const CommonKey = `unique-key-${searchQuery}-page-${pageNo}`;
 
-  redisClient.get(CommonKey).then((result) => {
-    if (result) {
-      // Serve from redis
-      console.log(`Found in Redis`);
-      const resultJSON = JSON.parse(result);
-      res.json(resultJSON);
-    } else {
-      console.log("serve from API...");
-      axios.request(options).then((response) => {
-        const responseJSON = response.data;
-        redisClient.setEx(
-          CommonKey,
-          3600,
-          JSON.stringify({
-            ...responseJSON,
-            source: "Redis Cache",
+  redisClient
+    .get(CommonKey)
+    .then((result) => {
+      if (result) {
+        // Serve from redis
+        console.log(`Found in Redis`);
+        const resultJSON = JSON.parse(result);
+        res.json(resultJSON);
+      } else {
+        console.log("serve from API...");
+        axios
+          .request(options)
+          .then((response) => {
+            const responseJSON = response.data;
+            res.json({
+              ...responseJSON,
+              source: "API",
+            });
+            return responseJSON;
           })
-        );
-        const body = JSON.stringify({
-          ...responseJSON,
-          source: "S3 Bucket",
-        });
-      });
-    }
-  });
+          .then((response) => {
+            redisClient.setEx(
+              CommonKey,
+              3600,
+              JSON.stringify({
+                ...response,
+                source: "Redis Cache",
+              })
+            );
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error, "error from the server");
+    });
 };
 
 module.exports.getImages = getImages;

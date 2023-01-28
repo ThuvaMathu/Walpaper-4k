@@ -3,19 +3,25 @@ import DownloadModel from "../elements/download-model";
 import { useProvider } from "../../context/provider";
 import LoadMore from "../elements/loadmore";
 import { demoResult } from "../../services/demo-results";
+import { commonUrl } from "../../services/config";
 
 export const ImageComponents = () => {
-  const { imageRes, headerValue } = useProvider();
-  const [imageData, setImageData] = useState(demoResult.photos);
+  const {
+    setImageRes,
+    imageRes,
+    setIsLoading,
+    headerValue,
+    //  setPageValue,
+    //  pageValue,
+  } = useProvider();
+  const [imageData, setImageData] = useState([]);
   const [data, setData] = useState();
   const [showModal, setShowModal] = useState(false);
-
+  const [pageValue, setPageValue] = useState(1);
+  const [tempReq, setTempReq] = useState("");
   useEffect(() => {
-    console.log(imageRes, imageRes == null, "data");
-    if (imageRes !== null) {
-      setImageData(imageRes);
-    }
-  }, [imageRes]);
+    getImage();
+  }, [headerValue]);
 
   const handleClickOpen = (dataValue) => {
     setData(dataValue);
@@ -25,6 +31,7 @@ export const ImageComponents = () => {
     setData(param.data);
     setShowModal(param.status);
   };
+
   const handleDownload = (image) => {
     const blob1 = new Blob([image?.src?.original], {
       type: "multipart/form-data",
@@ -35,66 +42,118 @@ export const ImageComponents = () => {
     link.download = filename;
     link.click();
   };
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const handleMenuClose = () => {
-  //   setAnchorEl(null);
-  //   setOpenMenu(false);
-  // };
+
+  const getImage = () => {
+    setIsLoading(true);
+    var tempData = imageData;
+    var tempPage = pageValue;
+    if (tempReq !== headerValue) {
+      tempData = [];
+      tempPage = 1;
+      setTempReq(headerValue);
+    }
+    const options = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ reqData: headerValue, reqPage: tempPage }),
+    };
+    fetch(`${commonUrl}/searchimage`, options)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.total_results > 0) {
+          setPageValue(tempPage + 1);
+          tempData.push(response);
+          //console.log("loadmore.. i am working", tempData);
+        } else {
+          console.log(response, "no data");
+        }
+        return tempData;
+      })
+      .then((data) => {
+        setImageData(data);
+      })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((err) => console.error(err, "error from client"));
+  };
+
   return (
     <div className="container mx-auto min-h-screen">
-      <h1 className="text-5xl font-bold m-2 capitalize  ">{headerValue}</h1>
+      <h1 className="text-xl font-bold m-2 capitalize sm:text-3xl md:text-4xl ">
+        {headerValue}
+      </h1>
       <div className="gap-4 columns-1  md:columns-3">
-        {imageData.map((imagedata, index) => (
-          <div
-            className="relative  group"
-            key={index}
-            // onClick={() => handleClickOpen(imagedata)}
-            onClick={() => handleModel({ data: imagedata, status: true })}
-          >
+        {imageData.map((imageArray) =>
+          imageArray.photos.map((imagedata, index) => (
             <div
-              className="px-2 py-4"
-              onClick={() => handleClickOpen(imagedata)}
+              className="relative  group"
+              key={index}
+              // onClick={() => handleClickOpen(imagedata)}
+              onClick={() => handleModel({ data: imagedata, status: true })}
             >
-              <img
-                className="w-[480px] h-auto rounded-[5px]"
-                src={imagedata?.src?.large}
-                alt={imageData?.alt}
-              />
-            </div>
-            <div className="absolute px-4 text-start text-lg text-white bottom-8 opacity-0 group-hover:opacity-100">
-              {imagedata.photographer}
-            </div>
-            <div className="absolute  px-4 text-end text-lg text-white bottom-8 right-2 opacity-0 group-hover:opacity-100">
-              <button
-                type="button"
-                className="bg-white text-black border border-white-700   font-medium rounded-lg text-sm p-2.5 text-center"
-                onClick={() => handleDownload(imagedata)}
+              <div
+                className="px-2 py-4"
+                onClick={() => handleClickOpen(imagedata)}
               >
-                <svg
-                  width="24"
-                  height="24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <img
+                  className="w-[480px] h-auto rounded-[5px]"
+                  src={imagedata?.src?.large}
+                  alt={imagedata?.alt}
+                />
+              </div>
+              <div className="absolute px-4 text-start text-lg text-white bottom-8 opacity-0 group-hover:opacity-100">
+                {imagedata.photographer}
+              </div>
+              <div className="absolute  px-4 text-end text-lg text-white bottom-8 right-2 opacity-0 group-hover:opacity-100">
+                <button
+                  type="button"
+                  className="bg-white text-black border border-white-700   font-medium rounded-lg text-sm p-2.5 text-center"
+                  onClick={() => handleDownload(imagedata)}
                 >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"
-                    fill="#000"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M12 3a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zM5 20a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"
-                    fill="#000"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"
+                      fill="#000"
+                    />
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M12 3a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zM5 20a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"
+                      fill="#000"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
-      <LoadMore />
+      {imageData.length > 0 ? (
+        <LoadMore getImg={getImage} />
+      ) : (
+        <div className=" flex justify-center items-center text-center ">
+          <span className=" text-lg ">
+            No result found for{" "}
+            <span className=" capitalize font-semibold text-[#f98541] ">
+              {headerValue}
+            </span>
+            <br />
+            Try somethig else{" "}
+          </span>
+        </div>
+      )}
+
       <div className={`${showModal ? "block" : " hidden "}`}>
         <DownloadModel handle={handleModel} imageData={data} />
       </div>

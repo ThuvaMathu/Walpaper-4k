@@ -1,8 +1,11 @@
 import React from "react";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
+import { useProvider } from "../../../context/provider";
 
 export default function Carousel() {
+  const { setheaderValue } = useProvider();
+
   const datas = [
     "Walpaper",
     "Natures",
@@ -14,7 +17,7 @@ export default function Carousel() {
   ];
   return (
     <div>
-      <div className=" mx-2 sm:m-4 px-4 h-14 mb-10  ">
+      <div className=" mx-1 sm:m-4 px-1 sm:px-4 h-14 mb-10  ">
         <Splide
           hasTrack={false}
           options={{
@@ -34,9 +37,12 @@ export default function Carousel() {
             <SplideTrack>
               {datas.map((data, index) => (
                 <SplideSlide key={index}>
-                  <div className=" h-14 m-1">
-                    <div className="border border-gray-300 rounded-md px-6 py-2 hover:bg-[#ffbb00] hover:text-white duration-300 transition ">
-                      <h5 className=" text-center font-medium truncate text-md ">
+                  <div
+                    className=" h-8 m-1 hover:cursor-pointer "
+                    onClick={() => setheaderValue(data)}
+                  >
+                    <div className="border border-gray-300 rounded-md px-3 sm:px-6 py-1 sm:py-2 hover:bg-[#f98541] hover:text-white duration-500 transition-all hover:scale-110 ease-in-out ">
+                      <h5 className=" text-center font-medium truncate text-sm sm:text-md ">
                         {data}
                       </h5>
                     </div>
@@ -45,12 +51,12 @@ export default function Carousel() {
               ))}
             </SplideTrack>
             <div className="splide__arrows mx-2 text-slate-800  ">
-              <button className="splide__arrow--prev absolute top-0 left-0 h-14  ">
+              <button className="splide__arrow--prev absolute top-0 left-0 h-10 sm:h-14  ">
                 <h6 className=" text-2xl text-gray-500 font-semibold text-left shadow-[10px_0px_50px_30px_rgba(255,255,255,0.8)]">
                   {"<"}
                 </h6>
               </button>
-              <button className="splide__arrow--next absolute top-0 right- h-14  ">
+              <button className="splide__arrow--next absolute top-0 right- h-10 sm:h-14  ">
                 <h6 className=" text-2xl text-gray-500 font-semibold text-right shadow-[-10px_0px_50px_30px_rgba(255,255,255,0.8)] ">
                   {">"}
                 </h6>
