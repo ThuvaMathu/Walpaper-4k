@@ -1,8 +1,9 @@
-$primary: #fe5e01;
-$secondary: #9c0000;
-$tertiary: #ffcbae;
-$textPrimary:#dc4100;
-$alternate:#ff9900;
+$primary: #00A6fb;
+$secondary: #0582ca;
+$tertiary: #006494;
+$partialDark:#003554;
+$dark:#051923;
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -18,7 +19,7 @@ $alternate:#ff9900;
 // #fe5e01 #ff7c3a #ff9761 #ffb188 #ffcbae #ffe5d6
 // $color: #926def, #8c6ced, #876beb, #6565dd, #5f64db;
 
-$color1: #fcd5ba,#f9b17e,#f9a569,#fc9e5c,#fa8e40,#fe7615;
+$color1:#00A6fb, #0582ca, #006494, #003554, #051923;
 
 .loader-container {
     display: flex;

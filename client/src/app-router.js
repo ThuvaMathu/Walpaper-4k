@@ -8,14 +8,16 @@ import MainNav from "./components/navbar/nav";
 
 export const AppRouter = () => (
   <>
-    <BrowserRouter>
-      <MainNav />
-      <Routes>
-        <Route index path="/" element={<Landing />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
+    <div className=" relative">
+      <BrowserRouter>
+        <MainNav />
+        <Routes>
+          <Route index path="/" element={<Landing />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   </>
 );

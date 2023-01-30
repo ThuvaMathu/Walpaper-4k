@@ -13,14 +13,14 @@ export default function CloseIcon(props) {
       >
         <path
           d="M18 6L6 18"
-          stroke="#1F2937"
+          stroke="#dc4100"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M6 6L18 18"
-          stroke="#1F2937"
+          stroke="#dc4100"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

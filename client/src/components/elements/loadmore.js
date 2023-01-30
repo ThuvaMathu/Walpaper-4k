@@ -50,7 +50,7 @@ export default function LoadMore(props) {
     <div className=" flex justify-center items-center ">
       <button
         type="button"
-        className=" shadow-md rounded-md w-full max-w-md  text-lg mx-10 hover:bg-[#f98541] ease-linear hover:text-white duration-300 transition hover:scale-105  "
+        className=" shadow-sm rounded-md w-full max-w-md shadow-[#0582ca] text-xl font-semibold mx-10 ease-linear hover:text-[#f98541] duration-300 transition hover:scale-105  "
         onClick={() => props.getImg()}
       >
         {isLoading ? loader : loadText}
