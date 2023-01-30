@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-no-bg.png";
 import Searchbar from "./searchbar";
@@ -6,69 +6,41 @@ import BurgerMenu from "../icons/burger-menu";
 import CloseIcon from "../icons/close-icon";
 import "../styles.scss";
 import MenuList from "./menuList";
+import MainLogo, { mainLogo } from "../icons/logo";
+import NavComponent from "./nav-component";
 export default function MainNav() {
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const [show, setshow] = useState(false);
+  const [position, setPosition] = useState(0);
+  const myRef = useRef(null);
   const handleClick = () => {
     setshow(!show);
   };
 
+  const handleScroll = () => {
+    const positions = window.pageYOffset;
+    setPosition(positions);
+  };
   return (
-    <div className=" bg-[#ffe5d6]">
-      <nav className="2xl:container 2xl:mx-auto sm:py-4 sm:px-7 py-4 px-4">
-        {/* For large and Medium-sized Screen */}
-        <div className="flex justify-between sm:justify-evenly items-center  ">
-          <div className=" sm:flex flex-row items-center space-x-6">
-            <Link to="/">
-              <img
-                className="img-responsive w-14 sm:w-20"
-                src={logo}
-                alt="logo"
-              />
-            </Link>
-          </div>
-          <p className=" text-[#dc4100] text-2xl mx-2 font-semibold hidden xl:block ">
-            Wall Desk
-          </p>
-          <div className=" grow space-x-3 items-center  mx-4">
-            <Searchbar />
-          </div>
-          <div className="hidden sm:flex flex-row space-x-4">
-            <div className="flex items-center">
-              <MenuList styles={"hidden md:flex"} />
-              {/* <div className="hidden md:flex">
-                <ThemeSwitch />
-              </div> */}
-            </div>
-          </div>
-          {/* Burger Icon */}
-          <div
-            id="bgIcon"
-            onClick={() => handleClick()}
-            className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800  justify-center items-center md:hidden cursor-pointer`}
-          >
-            <BurgerMenu show={show} />
-            <CloseIcon show={show} />
-          </div>
-        </div>
-        {/* Mobile and small-screen devices (toggle Menu) */}
-        <div
-          className={`${
-            show ? "max-h-60 mt-4" : "max-h-0"
-          } md:hidden  mx-auto truncate transition-all ease-in-out duration-700`}
-        >
-          <div className="flex min-[260px]:flex-row flex-col items-center justify-center mx-0 sm:mx-10 ">
-            <p className="text-[#dc4100] text-2xl mx-2 font-semibold  ">
-              Wall Desk
-            </p>
-            {/* <ThemeSwitch /> */}
-          </div>
-          <div className="">
-            <div className="flex items-center justify-start mx-20  ">
-              <MenuList styles={""} />
-            </div>{" "}
-          </div>
-        </div>
-      </nav>
-    </div>
+    <>
+      <div className="">
+        <NavComponent />
+      </div>
+      <div
+        className={`fixed w-full top-0 z-20  shadow-md  shadow-[#0582ca] ${
+          position > 92 ? "opacity-100" : "opacity-0"
+        } transition-opacity duration-500 ease-in-out `}
+      >
+        <NavComponent />
+      </div>
+      {/* <div className="">
+        <h6 className=" m-2 text-xl ">hello: {position} </h6>
+      </div> */}
+    </>
   );
 }
