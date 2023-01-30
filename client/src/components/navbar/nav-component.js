@@ -21,7 +21,7 @@ export default function NavComponent() {
           <div className=" sm:flex flex-row items-center space-x-4">
             <Link to="/">
               <div className=" hidden sm:block ">
-                <MainLogo width={90} height={90} />
+                <MainLogo width={75} height={75} />
               </div>
               <div className=" sm:hidden">
                 <MainLogo width={60} height={60} />

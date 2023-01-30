@@ -1,12 +1,5 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/logo-no-bg.png";
-import Searchbar from "./searchbar";
-import BurgerMenu from "../icons/burger-menu";
-import CloseIcon from "../icons/close-icon";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles.scss";
-import MenuList from "./menuList";
-import MainLogo, { mainLogo } from "../icons/logo";
 import NavComponent from "./nav-component";
 export default function MainNav() {
   useEffect(() => {

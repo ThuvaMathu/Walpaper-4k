@@ -9,12 +9,12 @@ export default function Footer() {
       <div className="  mt-8 relative bg-[#003554] ">
         <div className="z-10">
           <footer className="text-gray-600 body-font relative  ">
-            <div className="container px-5 py-4 mx-auto flex items-center sm:flex-row flex-col">
+            <div className="container px-5 py-2 mx-auto flex items-center sm:flex-row flex-col">
               <a
                 href="/"
                 className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
               >
-                <MainLogo width={120} height={120} />
+                <MainLogo width={90} height={90} />
 
                 <span className="ml-3 text-xl text-[#dc4100] ">walldesk</span>
               </a>
