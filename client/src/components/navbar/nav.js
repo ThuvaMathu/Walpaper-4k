@@ -25,9 +25,11 @@ export default function MainNav() {
         <NavComponent />
       </div>
       <div
-        className={`fixed w-full top-0 z-20  shadow-md  shadow-[#0582ca] ${
+        className={` ${
+          position < 16 ? "hidden" : "block"
+        } fixed w-full top-0 z-20  shadow-md  shadow-[#0582ca] ${
           position > 92 ? "opacity-100" : "opacity-0"
-        } transition-opacity duration-500 ease-in-out `}
+        } transition-all duration-500 ease-in-out `}
       >
         <NavComponent />
       </div>
