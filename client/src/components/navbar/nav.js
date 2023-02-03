@@ -21,10 +21,10 @@ export default function MainNav() {
   };
   return (
     <>
-      <div className="">
+      {/* <div className="">
         <NavComponent />
-      </div>
-      <div
+      </div> */}
+      {/* <div
         className={` ${
           position < 16 ? "hidden" : "block"
         } fixed w-full top-0 z-20  shadow-md  shadow-[#0582ca] ${
@@ -32,10 +32,20 @@ export default function MainNav() {
         } transition-all duration-500 ease-in-out `}
       >
         <NavComponent />
-      </div>
+      </div> */}
       {/* <div className="">
         <h6 className=" m-2 text-xl ">hello: {position} </h6>
       </div> */}
+
+      <div
+        className={`${position > 78 ? "opacity-0" : ""} ${
+          position > 88
+            ? "opacity-100 fixed w-full top-0 z-20  shadow-md  shadow-[#0582ca]"
+            : ""
+        } transition-all duration-500 ease-in-out `}
+      >
+        <NavComponent />
+      </div>
     </>
   );
 }
