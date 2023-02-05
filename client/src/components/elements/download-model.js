@@ -9,6 +9,8 @@ export default function DownloadModel(props) {
   const [bgColor, setBgColor] = useState("");
   const [showInfo, setShowInfo] = useState(false);
   const [showLoadModal, setShowLoadModal] = useState(false);
+  const [isShare, setIsShare] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const scrollT = useRef();
 
   useEffect(() => {
@@ -16,6 +18,13 @@ export default function DownloadModel(props) {
       setBgColor(props.imageData?.avg_color);
     } else {
       setBgColor("azure");
+    }
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      setIsMobile(false);
     }
     return () => {
       setBgColor("");
@@ -42,6 +51,29 @@ export default function DownloadModel(props) {
   const handleModel = (param) => {
     setShowLoadModal(param);
   };
+  async function shareImage() {
+    setIsShare(true);
+    const response = await fetch(props.imageData?.src?.original);
+    const blob = await response.blob();
+    const filesArray = [
+      new File([blob], "meme.jpg", {
+        type: "image/jpeg",
+        lastModified: new Date().getTime(),
+      }),
+    ];
+    const shareData = {
+      files: filesArray,
+    };
+    navigator.share(shareData);
+    setIsShare(false);
+  }
+
+  const showData = (title, data) => (
+    <p className=" ml-2 ">
+      <span className=" font-medium "> {title}: </span>{" "}
+      {props.imageData?.[data]}
+    </p>
+  );
   const imageInfo = (
     <div ref={scrollT} className=" hidden p-3 relative">
       <div className=" absolute top-2 right-2 ">
@@ -52,10 +84,23 @@ export default function DownloadModel(props) {
           <CloseIcon show={true} />
         </button>
       </div>
-      <h1>Image info</h1>
-      <p className=" ml-2 ">Image info goes here .....</p>
-      <h1>Author info</h1>
-      <p className=" ml-2 ">Author info goes here .....</p>
+      <div className=" flex justify-center items-start flex-col ml-3 ">
+        <h1 className=" text-lg font-semibold ">Image info</h1>
+        {showData("id", "id")}
+        {showData("name", "alt")}
+        {showData("name", "width")}
+        {showData("name", "height")}
+        <h1 className=" text-lg font-semibold ">Author info</h1>
+        {showData("Photographer_id", "photographer_id")}
+        {showData("Photographer", "photographer")}
+        <a
+          className=" ml-2 p-1 px-2 mt-2 border rounded-md shadow-sm bg-[#0582ca] cursor-pointer text-white  "
+          href={props.imageData?.photographer_url}
+          target="_blank"
+        >
+          learn more
+        </a>
+      </div>
     </div>
   );
   return (
@@ -136,12 +181,15 @@ export default function DownloadModel(props) {
                     </div>
                   </div>
                   <div className="flex items-end justify-end my-4">
-                    <button
-                      onClick={() => {}}
-                      className="px-4 mx-2 py-2 w-24 bg-gray-400 hover:bg-gray-500 shadow rounded text-sm text-white"
-                    >
-                      Share
-                    </button>
+                    {isMobile && (
+                      <button
+                        onClick={shareImage}
+                        className="px-4 mx-2 py-2 w-24 bg-gray-400 hover:bg-gray-500 shadow rounded text-sm text-white"
+                      >
+                        {isShare ? "Loading..." : "Share"}
+                      </button>
+                    )}
+
                     <button
                       className="px-4 py-2 mx-2 w-24 bg-indigo-700 hover:bg-opacity-80 shadow rounded text-sm text-white"
                       onClick={() => handleInfo()}

@@ -1,9 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import CloseIcon from "../icons/close-icon";
-import logo from "../../assets/logo-no-bg.png";
-import DownloadOption from "./download-option";
 import "../styles.scss";
-import LoaderWithLogo from "./loader-with-logo";
 import Tick from "../icons/tick";
 export default function ContactModel(props) {
   const tickRef = useRef();

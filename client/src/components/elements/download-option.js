@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function DownloadOption(props) {
   useEffect(() => {
     setSelectedSize(props.imageData?.src?.original);
@@ -35,6 +37,8 @@ export default function DownloadOption(props) {
       })
 
       .catch((err) => {
+        toast.dismiss();
+        toast.error("Sorry please try different images");
         props.hadle(false);
         console.log(err);
       });
@@ -131,7 +135,7 @@ export default function DownloadOption(props) {
           Download
         </button>
       </div>
-      <div className="flex items-center m-3">
+      {/* <div className="flex items-center m-3">
         <button
           type="button"
           onClick={() => props.handle(true)}
@@ -139,7 +143,7 @@ export default function DownloadOption(props) {
         >
           open demo modal
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

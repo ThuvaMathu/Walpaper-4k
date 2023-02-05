@@ -1,14 +1,7 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import CloseIcon from "../icons/close-icon";
-import logo from "../../assets/logo-no-bg.png";
-import DownloadOption from "./download-option";
+import React from "react";
 import "../styles.scss";
 import LoaderWithLogo from "./loader-with-logo";
 export default function LoadingModel(props) {
-  const [bgColor, setBgColor] = useState("");
-  const [showInfo, setShowInfo] = useState(false);
-  const scrollT = useRef();
-
   return (
     <>
       <div
@@ -18,7 +11,6 @@ export default function LoadingModel(props) {
         <div
           onClick={() => {
             props.handle(false);
-            setShowInfo(false);
           }}
           className="w-full h-full bg-gray-900/50 z-0 absolute inset-0"
         />
@@ -53,10 +45,6 @@ export default function LoadingModel(props) {
                     <div className=" text-center ">
                       <span className=" text-xl text-slate-800 font-semibold ">
                         Download commencing shortly
-                      </span>
-                      <br />
-                      <span className=" text-ssm text-slate-800 font-['roboto condensed'] ">
-                        please wait...
                       </span>
                     </div>
                   </div>

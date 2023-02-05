@@ -1,7 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo-no-bg.png";
-import bgimg from "../../assets/sssurf.png";
-import MainLogo, { mainLogo } from "../icons/logo";
+import MainLogo from "../icons/logo";
 
 export default function Footer() {
   return (

@@ -12,6 +12,11 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [inputValidate, setInputValidate] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputValue((prevState) => ({
@@ -29,24 +34,41 @@ export default function Contact() {
       },
       body: JSON.stringify(inputValue),
     };
-    fetch(`${commonUrl}/send`, options)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response, "hello world");
-        if (response.code === 200) {
-          setShowModal(true);
-          setTimeout(() => {
-            setShowModal(false);
-          }, 5000);
-        } else {
+    if (
+      inputValidate.name !== inputValue.name &&
+      inputValidate.email !== inputValue.email
+    ) {
+      fetch(`${commonUrl}/send`, options)
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response, "hello world");
+          if (response.code === 200) {
+            setInputValidate(inputValue);
+
+            setShowModal(true);
+            setTimeout(() => {
+              setShowModal(false);
+            }, 5000);
+          } else {
+            toast.error("Something went wrong!, Try again later");
+          }
+        })
+        .then((response) => {
+          setInputValue({
+            name: "",
+            email: "",
+            message: "",
+          });
+        })
+        .catch((err) => {
+          toast.dismiss();
           toast.error("Something went wrong!, Try again later");
-        }
-      })
-      .catch((err) => {
-        toast.dismiss();
-        toast.error("Something went wrong!, Try again later");
-        console.error(err, "error from client");
-      });
+          console.error(err, "error from client");
+        });
+    } else {
+      toast.dismiss();
+      toast.warning("It looks like you have already submitted the form!");
+    }
   };
   return (
     <div>
@@ -66,11 +88,7 @@ export default function Contact() {
               height="100%"
               className="absolute inset-0 "
               style={{ filter: "grayscale(1) contrast(1.2) opacity(0.4)" }}
-              scrolling="no"
-              frameborder="0"
               title="map"
-              marginheight="0"
-              marginwidth="0"
               // src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
               src="https://maps.google.com/maps?q=21,%20elkhorn%20street,%20bellbird%20park&t=&z=13&ie=UTF8&iwloc=&output=embed"
             ></iframe>
@@ -80,7 +98,10 @@ export default function Contact() {
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                   ADDRESS
                 </h2>
-                <a href="https://goo.gl/maps/zD5wbBjVa8BBKnTE7" target="_blank">
+                <a
+                  href="https://goo.gl/maps/zD5wbBjVa8BBKnTE7"
+                  //</div>target="_blank"
+                >
                   <p className="mt-1">
                     21 Elkhorn street, Bellbird Park, Queensland - 4300,
                     Australia.
@@ -93,7 +114,7 @@ export default function Contact() {
                 </h2>
                 <a
                   href="https://mail.google.com"
-                  target={"_blank"}
+                  //target={"_blank"}
                   className="text-indigo-500 leading-relaxed"
                 >
                   excelbeesdigital@gmail.com
@@ -155,18 +176,12 @@ export default function Contact() {
                   />
                 </div>
                 <button
-                  className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+                  className="text-white bg-[#00A6fb] border-0 py-2 px-6 focus:outline-none hover:bg-[#0582ca] transition-all ease-in-out duration-300  hover:scale-105 rounded text-lg w-full"
                   type="submit"
                 >
                   Button
                 </button>
               </form>
-              {/* <button
-                className="text-white mt-10s bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
-                onClick={() => setShowModal(!showModal)}
-              >
-                opene model
-              </button> */}
             </div>
           </div>
         </div>
@@ -178,18 +193,6 @@ export default function Contact() {
         )}
       </div>
       <Footer />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 }

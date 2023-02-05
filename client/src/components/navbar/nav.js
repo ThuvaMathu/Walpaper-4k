@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles.scss";
 import NavComponent from "./nav-component";
 export default function MainNav() {
@@ -8,12 +8,7 @@ export default function MainNav() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const [show, setshow] = useState(false);
   const [position, setPosition] = useState(0);
-  const myRef = useRef(null);
-  const handleClick = () => {
-    setshow(!show);
-  };
 
   const handleScroll = () => {
     const positions = window.pageYOffset;
