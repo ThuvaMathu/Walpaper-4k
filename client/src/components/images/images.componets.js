@@ -4,21 +4,17 @@ import { useProvider } from "../../context/provider";
 import LoadMore from "../elements/loadmore";
 import { demoResult } from "../../services/demo-results";
 import { commonUrl } from "../../services/config";
+import CircleLoader from "../icons/circle-loader";
+import LoaderWithLogo from "../elements/loader-with-logo";
 
 export const ImageComponents = () => {
-  const {
-    setImageRes,
-    imageRes,
-    setIsLoading,
-    headerValue,
-    //  setPageValue,
-    //  pageValue,
-  } = useProvider();
+  const { headerValue } = useProvider();
   const [imageData, setImageData] = useState([]);
   const [data, setData] = useState();
   const [showModal, setShowModal] = useState(false);
   const [pageValue, setPageValue] = useState(1);
   const [tempReq, setTempReq] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getImage();
   }, [headerValue]);
@@ -32,23 +28,10 @@ export const ImageComponents = () => {
     setShowModal(param.status);
   };
 
-  const handleDownload = (image) => {
-    const blob1 = new Blob([image?.src?.original], {
-      type: "multipart/form-data",
-    });
-    const link = document.createElement("a");
-    link.href = window.URL.createObjectURL(blob1);
-    const filename = image?.src?.original;
-    link.download = filename;
-    link.click();
-  };
-
   const getImage = () => {
     setIsLoading(true);
-    var tempData = imageData;
     var tempPage = pageValue;
     if (tempReq !== headerValue) {
-      tempData = [];
       tempPage = 1;
       setImageData([]);
       setTempReq(headerValue);
@@ -80,7 +63,10 @@ export const ImageComponents = () => {
       .then(() => {
         setIsLoading(false);
       })
-      .catch((err) => console.error(err, "error from client"));
+      .catch((err) => {
+        setIsLoading(false);
+        console.error(err, "error from client");
+      });
   };
   return (
     <div className="container mx-auto min-h-screen">
@@ -115,7 +101,10 @@ export const ImageComponents = () => {
                     <button
                       type="button"
                       className="bg-white text-black border border-white-700   font-medium rounded-lg text-sm p-2.5 text-center"
-                      onClick={() => handleDownload(imagedata)}
+                      onClick={
+                        () => {}
+                        // handleDownload(imagedata)
+                      }
                     >
                       <svg
                         width="24"
@@ -145,7 +134,12 @@ export const ImageComponents = () => {
           </div>
         ))}
       </div>
-      {imageData.length > 0 ? (
+      {isLoading ? (
+        <div className=" flex justify-center items-center text-center ">
+          {/* <CircleLoader width={100} height={100} /> */}
+          <LoaderWithLogo />
+        </div>
+      ) : imageData.length > 0 ? (
         <LoadMore getImg={getImage} />
       ) : (
         <div className=" flex justify-center items-center text-center ">

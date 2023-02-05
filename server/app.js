@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+var AWS = require("aws-sdk");
 const app = express();
 const port = 8000;
 const cors = require("cors");
@@ -25,7 +26,16 @@ app.use(function (req, res, next) {
 app.use(express.static("./view"));
 const apisRouter = require("./routes/api_routes");
 app.use("/api", apisRouter);
-
+// Set the region
+AWS.config.update({ region: "ap-southeast-2" });
+var credentials = new AWS.SharedIniFileCredentials();
+AWS.config.credentials = credentials;
+AWS.config.getCredentials(function (err) {
+  if (err) console.log("AWS credentials loaded successfully\n", err.stack);
+  else {
+    console.log("**AWS credentials loaded successfully");
+  }
+});
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "./view", "index.html"));
 });

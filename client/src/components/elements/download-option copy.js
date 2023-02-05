@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 export default function DownloadOption(props) {
   useEffect(() => {
-    setSelectedSize(props.imageData?.src?.original);
+    setSelectedSize(props.imageData?.src?.large);
 
     return () => {
       setSelectedSize();
@@ -9,7 +9,6 @@ export default function DownloadOption(props) {
   }, [props]);
 
   const [selectedsize, setSelectedSize] = useState();
-  const [displaySize, setDisplaySize] = useState("4480x6720");
 
   const handleDownload = (image) => {
     props.handle(true);
@@ -25,7 +24,7 @@ export default function DownloadOption(props) {
             const url = window.URL.createObjectURL(new Blob([buffer]));
             const link = document.createElement("a");
             link.href = url;
-            link.setAttribute("download", `${srcName + "-" + displaySize}.png`);
+            link.setAttribute("download", `${srcName}.png`);
             document.body.appendChild(link);
             link.click();
           })
@@ -49,10 +48,7 @@ export default function DownloadOption(props) {
           value={props.imageData?.src?.original}
           name="default-radio"
           className="w-4 h-4 bg-gray-100 border-gray-300"
-          onChange={(event) => {
-            setSelectedSize(event.target.value);
-            setDisplaySize("4480 x 6720");
-          }}
+          onChange={(event) => setSelectedSize(event.target.value)}
         ></input>
         <label
           htmlFor="default-radio-1"
@@ -69,10 +65,7 @@ export default function DownloadOption(props) {
           value={props.imageData?.src?.large}
           name="default-radio"
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-          onChange={(event) => {
-            setSelectedSize(event.target.value);
-            setDisplaySize("1920 x 2880");
-          }}
+          onChange={(event) => setSelectedSize(event.target.value)}
         ></input>
         <label
           htmlFor="default-radio-2"
@@ -89,10 +82,7 @@ export default function DownloadOption(props) {
           value={props.imageData?.src?.medium}
           name="default-radio"
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-          onChange={(event) => {
-            setSelectedSize(event.target.value);
-            setDisplaySize("1280 x 1920");
-          }}
+          onChange={(event) => setSelectedSize(event.target.value)}
         ></input>
         <label
           htmlFor="default-radio-1"
@@ -109,10 +99,7 @@ export default function DownloadOption(props) {
           value={props.imageData?.src?.small}
           name="default-radio"
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-          onChange={(event) => {
-            setSelectedSize(event.target.value);
-            setDisplaySize("640 x 960");
-          }}
+          onChange={(event) => setSelectedSize(event.target.value)}
         ></input>
         <label
           htmlFor="default-radio-"

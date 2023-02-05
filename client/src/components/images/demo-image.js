@@ -24,15 +24,25 @@ export const DemoImage = () => {
     setData(param.data);
     setShowModal(param.status);
   };
+
   const handleDownload = (image) => {
-    const blob1 = new Blob([image?.src?.original], {
-      type: "multipart/form-data",
-    });
-    const link = document.createElement("a");
-    link.href = window.URL.createObjectURL(blob1);
-    const filename = image?.src?.original;
-    link.download = filename;
-    link.click();
+    fetch(image?.src?.original, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => {
+        response.arrayBuffer().then(function (buffer) {
+          const url = window.URL.createObjectURL(new Blob([buffer]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", `${image?.alt}.png`);
+          document.body.appendChild(link);
+          link.click();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const [selectedsize, setSelectedSize] = useState();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -48,7 +58,7 @@ export const DemoImage = () => {
   const handleChange = (event) => {
     setSelectedSize(event.target.value);
   };
-  useEffect(() => {}, [openMenu]);
+
   const handleDownloadSlelectedSize = () => {
     const blob1 = new Blob([selectedsize], { type: "multipart/form-data" });
     const link = document.createElement("a");
@@ -84,7 +94,10 @@ export const DemoImage = () => {
               <button
                 type="button"
                 className="bg-white text-black border border-white-700   font-medium rounded-lg text-sm p-2.5 text-center"
-                onClick={() => handleDownload(imagedata)}
+                onClick={
+                  () => {}
+                  // handleDownload(imagedata)
+                }
               >
                 <svg
                   width="24"

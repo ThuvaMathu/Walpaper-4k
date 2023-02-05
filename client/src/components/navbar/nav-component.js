@@ -6,7 +6,7 @@ import BurgerMenu from "../icons/burger-menu";
 import CloseIcon from "../icons/close-icon";
 import "../styles.scss";
 import MenuList from "./menuList";
-import MainLogo, { mainLogo } from "../icons/logo";
+import MainLogo from "../icons/logo";
 export default function NavComponent() {
   const [show, setshow] = useState(false);
   const handleClick = () => {

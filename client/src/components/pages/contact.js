@@ -1,18 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import { commonUrl } from "../../services/config";
+import ContactModel from "../elements/contact-model";
 import Footer from "./footer";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Contact() {
+  const [showModal, setShowModal] = useState(false);
+
+  const [inputValue, setInputValue] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const sendMail = (e) => {
+    e.preventDefault();
+    const options = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputValue),
+    };
+    fetch(`${commonUrl}/send`, options)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response, "hello world");
+        if (response.code === 200) {
+          setShowModal(true);
+          setTimeout(() => {
+            setShowModal(false);
+          }, 5000);
+        } else {
+          toast.error("Something went wrong!, Try again later");
+        }
+      })
+      .catch((err) => {
+        toast.dismiss();
+        toast.error("Something went wrong!, Try again later");
+        console.error(err, "error from client");
+      });
+  };
   return (
     <div>
-      <div className="text-gray-600 body-font relative">
+      <div className="text-gray-600 relative font-common ">
         <div className="flex flex-col text-center w-full  px-1 py-5">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+          <span className="sm:text-2xl text-xl font-medium title-font mb-4 text-gray-900 font-common">
             Contact Us
-          </h1>
+          </span>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-            gentrify, subway tile poke farm-to-table. Franzen you probably
-            haven't heard of them man bun deep jianbing selfies heirloom prism
-            food truck ugh squid celiac humblebrag.
+            Have any questions? we'd love to hear from you.
           </p>
         </div>
         <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
@@ -36,22 +80,30 @@ export default function Contact() {
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                   ADDRESS
                 </h2>
-                <p className="mt-1">
-                  Photo booth tattooed prism, portland taiyaki hoodie neutra
-                  typewriter
-                </p>
+                <a href="https://goo.gl/maps/zD5wbBjVa8BBKnTE7" target="_blank">
+                  <p className="mt-1">
+                    21 Elkhorn street, Bellbird Park, Queensland - 4300,
+                    Australia.
+                  </p>
+                </a>
               </div>
               <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                   EMAIL
                 </h2>
-                <a href="/" className="text-indigo-500 leading-relaxed">
-                  example@email.com
+                <a
+                  href="https://mail.google.com"
+                  target={"_blank"}
+                  className="text-indigo-500 leading-relaxed"
+                >
+                  excelbeesdigital@gmail.com
                 </a>
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
                   PHONE
                 </h2>
-                <p className="leading-relaxed">123-456-7890</p>
+                <a href="tel:0416683460">
+                  <p className="leading-relaxed">+61 416 683 460</p>
+                </a>
               </div>
             </div>
           </div>
@@ -60,37 +112,84 @@ export default function Contact() {
               Feedback
             </h2>
             <p className="leading-relaxed mb-5 text-gray-600">
-              Post-ironic portland shabby chic echo park, banjo fashion axe
+              Please comment to improve our knowledge.
             </p>
-            <div className="relative mb-4">
-              <label className="leading-7 text-sm text-gray-600">Name</label>
-              <input
-                type="text"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
+            <div className=" w-full ">
+              <form onSubmit={(e) => sendMail(e)}>
+                <div className="relative mb-4">
+                  <label className="leading-7 text-sm text-gray-600">
+                    Name
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    value={inputValue.name}
+                    onChange={(e) => handleChange(e)}
+                    name="name"
+                  />
+                </div>
+                <div className="relative mb-4">
+                  <label className="leading-7 text-sm text-gray-600">
+                    Email
+                  </label>
+                  <input
+                    required
+                    type="email"
+                    className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    value={inputValue.email}
+                    onChange={(e) => handleChange(e)}
+                    name="email"
+                  />
+                </div>
+                <div className="relative mb-4">
+                  <label className="leading-7 text-sm text-gray-600">
+                    Message
+                  </label>
+                  <textarea
+                    required
+                    className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                    value={inputValue.message}
+                    onChange={(e) => handleChange(e)}
+                    name="message"
+                  />
+                </div>
+                <button
+                  className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+                  type="submit"
+                >
+                  Button
+                </button>
+              </form>
+              {/* <button
+                className="text-white mt-10s bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+                onClick={() => setShowModal(!showModal)}
+              >
+                opene model
+              </button> */}
             </div>
-            <div className="relative mb-4">
-              <label className="leading-7 text-sm text-gray-600">Email</label>
-              <input
-                type="email"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label className="leading-7 text-sm text-gray-600">Message</label>
-              <textarea className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" />
-            </div>
-            <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Button
-            </button>
-            <p className="text-xs text-gray-500 mt-3">
-              Chicharrones blog helvetica normcore iceland tousled brook viral
-              artisan.
-            </p>
           </div>
         </div>
       </div>
+
+      <div>
+        {showModal && (
+          <ContactModel handle={setShowModal} tickState={showModal} />
+        )}
+      </div>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

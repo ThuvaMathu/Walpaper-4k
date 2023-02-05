@@ -11,33 +11,7 @@ export default function Searchbar() {
   const getImage = (e) => {
     e.preventDefault();
     setheaderValue(inputValue);
-    // setIsLoading(true);
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ reqData: inputValue, reqPage: 1 }),
-    // };
-    // fetch(`${commonUrl}/searchimage`, options)
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     console.log(response, "data");
-    //     if (response.total_results > 0) {
-    //       console.log("data i am working");
-    //       setPageValue(1);
-    //       setheaderValue(inputValue);
-    //       setImageRes(response.photos);
-    //       setIsLoading(false);
-    //     } else {
-    //       console.log(response, "no data");
-    //     }
-    //   })
-    //   .then(() => {
-    //     setInputValue("");
-    //   })
-    //   .catch((err) => console.error(err, "error from client"));
+    setInputValue("");
   };
   return (
     <div>

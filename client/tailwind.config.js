@@ -22,7 +22,7 @@ module.exports = {
     // },
 
     fontFamily: {
-      serif: ["Georgia", "serif"],
+      common: ["arial"],
     },
     extend: {
       spacing: {
