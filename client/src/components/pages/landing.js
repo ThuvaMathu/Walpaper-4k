@@ -8,8 +8,8 @@ export default function Landing() {
   return (
     <div>
       <Carousel />
-      <ImageComponents />
-      {/* <DemoImage /> */}
+      {/* <ImageComponents /> */}
+      <DemoImage />
       <Footer />
     </div>
   );

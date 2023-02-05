@@ -3,6 +3,7 @@ import CloseIcon from "../icons/close-icon";
 import logo from "../../assets/logo-no-bg.png";
 import DownloadOption from "./download-option";
 import "../styles.scss";
+import LoaderWithLogo from "./loader-with-logo";
 export default function LoadingModel(props) {
   const [bgColor, setBgColor] = useState("");
   const [showInfo, setShowInfo] = useState(false);
@@ -23,7 +24,7 @@ export default function LoadingModel(props) {
         />
         <div className="mx-auto container ">
           <div className="flex items-center justify-center h-full w-full">
-            <div className="bg-white rounded-md shadow fixed items-center justify-center overflow-scroll">
+            <div className="bg-white rounded-md shadow fixed items-center justify-center">
               <div className=" flex items-center justify-center p-5 w-full">
                 <div className=" flex  flex-col-reverse md:flex-row items-center justify-around">
                   <div className="flex flex-col items-center justify-center p-2 text-center  bg-slate-200 ">
@@ -44,8 +45,20 @@ export default function LoadingModel(props) {
                   </div>
 
                   <div className=" h-60 w-[1px] bg-black m-6 hidden md:block " />
-                  <div className="flex items-center justify-center p-2">
-                    world
+                  <div className=" h-[1px] w-full bg-black m-6 block md:hidden " />
+                  <div className="flex flex-col items-center justify-center p-2 min-w-[100px] ">
+                    <div className="">
+                      <LoaderWithLogo />
+                    </div>
+                    <div className=" text-center ">
+                      <span className=" text-xl text-slate-800 font-semibold ">
+                        Download commencing shortly
+                      </span>
+                      <br />
+                      <span className=" text-ssm text-slate-800 font-['roboto condensed'] ">
+                        please wait...
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
