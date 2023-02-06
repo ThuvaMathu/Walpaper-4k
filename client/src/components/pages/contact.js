@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { commonUrl } from "../../services/config";
 import ContactModel from "../elements/contact-model";
 import Footer from "./footer";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Contact() {
   const [showModal, setShowModal] = useState(false);

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useProvider } from "../../context/provider";
-import { commonUrl } from "../../services/config";
 import SearchIcon from "../icons/search-icon";
 
 export default function Searchbar() {
   const [inputValue, setInputValue] = useState("");
-  const { setImageRes, setIsLoading, setheaderValue, setPageValue } =
-    useProvider();
+  const { setheaderValue } = useProvider();
 
   const getImage = (e) => {
     e.preventDefault();

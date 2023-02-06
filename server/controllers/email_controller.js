@@ -28,7 +28,7 @@ const sendMail = async (req, res, next) => {
    `;
   var params = {
     Destination: {
-      ToAddresses: ["thuvamathu2097@gmail.com"],
+      ToAddresses: ["thuvarakan2097@gmail.com"],
     },
     Message: {
       Body: {
@@ -47,7 +47,7 @@ const sendMail = async (req, res, next) => {
       },
     },
     Source: "wall-desk@thuvarakan.info" /* required */,
-    ReplyToAddresses: ["thuvarakan2097@gmail.com"],
+    //ReplyToAddresses: ["thuvarakan2097@gmail.com"],
   };
   var sendPromise = new AWS.SES({ apiVersion: "2010-12-01" })
     .sendEmail(params)

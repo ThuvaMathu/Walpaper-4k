@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 var AWS = require("aws-sdk");
 const app = express();
-const port = 8000;
+const port = 8080;
 const cors = require("cors");
 var bodyParser = require("body-parser");
 app.use(bodyParser.json({ limit: "50mb" }));

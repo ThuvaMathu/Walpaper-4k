@@ -1,6 +1,5 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo-no-bg.png";
 import Searchbar from "./searchbar";
 import BurgerMenu from "../icons/burger-menu";
 import CloseIcon from "../icons/close-icon";
@@ -69,7 +68,7 @@ export default function NavComponent() {
           </div>
           <div className="">
             <div className="flex items-center justify-start mx-20  ">
-              <MenuList styles={""} />
+              <MenuList styles={""} handle={setshow} />
             </div>{" "}
           </div>
         </div>

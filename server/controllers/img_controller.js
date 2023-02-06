@@ -65,6 +65,9 @@ const getImages = async (req, res, next) => {
                 source: "Redis Cache",
               })
             );
+          })
+          .catch((err) => {
+            console.error(err);
           });
       }
     })

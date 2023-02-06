@@ -4,7 +4,6 @@ import { useProvider } from "../../context/provider";
 import LoadMore from "../elements/loadmore";
 import { demoResult } from "../../services/demo-results";
 import { commonUrl } from "../../services/config";
-import CircleLoader from "../icons/circle-loader";
 import LoaderWithLogo from "../elements/loader-with-logo";
 
 export const ImageComponents = () => {
