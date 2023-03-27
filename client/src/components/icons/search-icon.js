@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function SearchIcon() {
+export default function SearchIcon(props) {
   return (
     <div>
       <svg
         aria-hidden="true"
-        className="w-6 h-6 text-[#dc4100] "
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
+        {...props}
       >
         <path
           strokeLinecap="round"

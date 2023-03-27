@@ -6,8 +6,10 @@ import CloseIcon from "../icons/close-icon";
 import "../styles.scss";
 import MenuList from "./menuList";
 import MainLogo from "../icons/logo";
+import SearchIcon from "../icons/search-icon";
 export default function NavComponent() {
   const [show, setshow] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const handleClick = () => {
     setshow(!show);
   };
@@ -17,7 +19,7 @@ export default function NavComponent() {
       <nav className="2xl:container 2xl:mx-auto sm:py-0 sm:px-7 py-2 px-4">
         {/* For large and Medium-sized Screen */}
         <div className="flex justify-between sm:justify-evenly items-center  ">
-          <div className=" sm:flex flex-row items-center space-x-4">
+          <div className=" flex flex-row items-center space-x-4">
             <Link to="/">
               <div className=" hidden sm:block ">
                 <MainLogo width={75} height={75} />
@@ -26,13 +28,20 @@ export default function NavComponent() {
                 <MainLogo width={60} height={60} />
               </div>
             </Link>
+            <Link to="/">
+              <p className=" text-[#dc4100] text-2xl mx-2 font-semibold sm:hidden xl:block ">
+                Wall Desk
+              </p>
+            </Link>
           </div>
-          <Link to="/">
-            <p className=" text-[#dc4100] text-2xl mx-2 font-semibold hidden xl:block ">
-              Wall Desk
-            </p>
-          </Link>
-          <div className=" grow space-x-3 items-center  mx-4">
+          <div
+            className=" sm:hidden "
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            <SearchIcon className="w-6 h-6 mt-1 text-[#dc4100] " />
+          </div>
+
+          <div className=" hidden sm:block grow space-x-3 items-center  mx-4">
             <Searchbar />
           </div>
           <div className="hidden sm:flex flex-row space-x-4">
@@ -71,6 +80,13 @@ export default function NavComponent() {
               <MenuList styles={""} handle={setshow} />
             </div>{" "}
           </div>
+        </div>
+        <div
+          className={` ${
+            showSearch ? "block" : "hidden"
+          } sm:hidden grow mt-1  mx-2`}
+        >
+          <Searchbar />
         </div>
       </nav>
     </div>
