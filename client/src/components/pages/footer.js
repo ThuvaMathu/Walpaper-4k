@@ -19,7 +19,7 @@ export default function Footer() {
               <div className=" flex flex-col md:flex-row justify-center items-center sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-3 sm:ml-4 mt-2 ">
                 <div className="fler-row flex">
                   <p className="text-sm text-gray-500  sm:mt-0 ">
-                    © 2022 wall desk —
+                    2022 wall desk —
                   </p>
                   <a
                     href="https://twitter.com/knyttneve"

@@ -46,7 +46,7 @@ export default function NavComponent() {
           </div>
           <div className="hidden sm:flex flex-row space-x-4">
             <div className="flex items-center">
-              <MenuList styles={"hidden md:flex"} />
+              <MenuList styles={"hidden md:flex"} handle={setshow} />
               {/* <div className="hidden md:flex">
                 <ThemeSwitch />
               </div> */}

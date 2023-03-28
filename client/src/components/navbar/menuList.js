@@ -10,7 +10,7 @@ export default function MenuList(props) {
         {" "}
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
           <div className="group">
-            <Link to="/" onClick={() => props.handle(false)}>
+            <Link to="/" onClick={() => props?.handle(false)}>
               <p className="text-lg hover:text-[#fe5e01] text-rose-500 whitespace-nowrap tracking-normal transition-all duration-200 ease-in-out font-semibold">
                 Home
               </p>
@@ -20,7 +20,7 @@ export default function MenuList(props) {
         </li>
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
           <div className="group">
-            <Link to="/about" onClick={() => props.handle(false)}>
+            <Link to="/about" onClick={() => props?.handle(false)}>
               <p className="text-lg hover:text-[#fe5e01] text-rose-500 whitespace-nowrap tracking-normal transition-all duration-200 ease-in-out font-semibold">
                 About us
               </p>
@@ -29,7 +29,7 @@ export default function MenuList(props) {
           </div>
         </li>
         <li className="cursor-pointer h-full w-full flex items-center mx-5 my-2">
-          <div className="group " onClick={() => props.handle(false)}>
+          <div className="group " onClick={() => props?.handle(false)}>
             <Link to="/contact">
               <p className="text-lg  hover:text-[#fe5e01] text-rose-500 tracking-normal transition-all duration-200 ease-in-out font-semibold">
                 Contact

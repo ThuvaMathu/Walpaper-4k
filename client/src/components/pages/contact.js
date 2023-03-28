@@ -41,7 +41,7 @@ export default function Contact() {
       fetch(`${commonUrl}/send`, options)
         .then((response) => response.json())
         .then((response) => {
-          console.log(response, "hello world");
+          //console.log(response, "hello world");
           if (response.code === 200) {
             setInputValidate(inputValue);
 

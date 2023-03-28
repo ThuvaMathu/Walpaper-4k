@@ -34,7 +34,7 @@ export default function Carousel() {
     "4K Walpaper",
     "Hd Images",
     "Car",
-    "Ilustate",
+    "Illustrate",
     "Abstract",
     "Birds",
     "Animation",
@@ -99,10 +99,10 @@ export default function Carousel() {
             {datas.map((data, index) => (
               <Slide index={index} key={index}>
                 <div
-                  className=" h-8 m-1 hover:cursor-pointer "
+                  className=" h-8 mt-1 hover:cursor-pointer "
                   onClick={() => setheaderValue(data)}
                 >
-                  <div className="border border-gray-300 rounded-md px-3 sm:px-6 py-2 hover:bg-[#f98541] hover:text-white duration-500 transition-all hover:scale-110 ease-in-out ">
+                  <div className="border scale-95 border-gray-300 rounded-md px-3 sm:px-6 py-2 hover:bg-[#f98541] hover:text-white duration-500 transition-all hover:scale-100 ease-in-out ">
                     <h5 className=" text-center font-medium truncate text-sm sm:text-md ">
                       {data}
                     </h5>
