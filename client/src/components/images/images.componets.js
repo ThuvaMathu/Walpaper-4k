@@ -70,7 +70,7 @@ export const ImageComponents = () => {
   };
   return (
     <div className="container mx-auto min-h-screen">
-      <h1 className="text-xl font-bold m-2 capitalize sm:text-3xl md:text-4xl ">
+      <h1 className="text-xl font-bold m-2 capitalize sm:text-3xl md:text-4xl truncate px-6 ">
         {headerValue}
       </h1>
       <div className="">
@@ -151,15 +151,12 @@ export const ImageComponents = () => {
       ) : imageData.length > 0 ? (
         <LoadMore getImg={getImage} />
       ) : (
-        <div className=" flex justify-center items-center text-center ">
-          <span className=" text-lg ">
-            No result found for{" "}
-            <span className=" capitalize font-semibold text-[#f98541] ">
-              {headerValue}
-            </span>
-            <br />
-            Try somethig else{" "}
-          </span>
+        <div className=" text-lg flex flex-col justify-center items-center text-center px-10 ">
+          <p className="">No result found for</p>
+          <p className=" max-w-full capitalize font-semibold text-[#f98541] truncate ">
+            {headerValue}
+          </p>
+          <p>Try somethig else </p>
         </div>
       )}
 

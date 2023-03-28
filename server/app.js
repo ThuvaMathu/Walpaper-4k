@@ -23,7 +23,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(express.static("./view"));
+//app.use(express.static("./view"));
+app.use(express.static("../client/build"));
 const apisRouter = require("./routes/api_routes");
 app.use("/api", apisRouter);
 // Set the region
